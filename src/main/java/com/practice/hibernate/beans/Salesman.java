@@ -12,16 +12,18 @@ import javax.persistence.Table;
 public class Salesman {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
 	@Column(name = "salesman_name")
 	private String name;
-	@Column
+	@Column(name = "city")
 	private String city;
-	@Column
+	@Column(name = "commission")
 	private double commission;
-	
+	public Salesman() {
+		
+	}
 	public Salesman(int id, String name) {
 		this.id = id;
 		this.name = name;

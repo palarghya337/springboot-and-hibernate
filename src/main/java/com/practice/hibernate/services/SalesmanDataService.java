@@ -1,10 +1,10 @@
 package com.practice.hibernate.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.practice.hibernate.beans.Salesman;
 import com.practice.hibernate.repository.SalesmanRepository;
@@ -18,15 +18,17 @@ public class SalesmanDataService {
 	public void addSalesman(Salesman salesman) {
 		
 		repository.save(salesman);
-		/*
-		Salesman salesman = new Salesman(101, "Bittu");
-		salesman.setCity("Hyderabad");
-		salesman.setCommission(10452.33);
-		*/
 	}
-	@Transactional
 	public List<Salesman> getSalesmans() {
-		return repository.findAll();
+		List<Salesman> salesmen = repository.findAll();
+		if (salesmen == null) {
+			Salesman salesman = new Salesman(101, "Bittu");
+			salesman.setCity("Hyderabad");
+			salesman.setCommission(10452.33);
+			salesmen = new ArrayList<>();
+			salesmen.add(salesman);
+		}
+		return salesmen;
 	}
 
 }
