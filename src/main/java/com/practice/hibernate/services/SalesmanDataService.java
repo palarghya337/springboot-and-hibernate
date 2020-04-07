@@ -20,14 +20,15 @@ public class SalesmanDataService {
 		repository.save(salesman);
 	}
 	public List<Salesman> getSalesmans() {
+		
 		List<Salesman> salesmen = repository.findAll();
+		Salesman salesman = new Salesman(101, "Bittu");
+		salesman.setCity("Hyderabad");
+		salesman.setCommission(10452.33);
 		if (salesmen == null) {
-			Salesman salesman = new Salesman(101, "Bittu");
-			salesman.setCity("Hyderabad");
-			salesman.setCommission(10452.33);
 			salesmen = new ArrayList<>();
-			salesmen.add(salesman);
 		}
+		salesmen.add(salesman);
 		return salesmen;
 	}
 
