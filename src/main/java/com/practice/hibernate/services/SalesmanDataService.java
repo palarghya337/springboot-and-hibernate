@@ -19,16 +19,27 @@ public class SalesmanDataService {
 		
 		repository.save(salesman);
 	}
-	public List<Salesman> getSalesmans() {
+	public void updateSalesman(Salesman salesman) {
+		repository.saveAndFlush(salesman);
+	}
+	public Salesman getSalesman(int id) {
+		return repository.getOne(id);
+	}
+	public boolean deleteSalesMan(int id) {
+		Salesman salesman = getSalesman(id);
+		repository.delete(salesman);
+		return true;
+	}
+	public boolean deleteAll() {
+		repository.deleteAll();
+		return true;
+	}
+	public List<Salesman> getSalesmen() {
 		
 		List<Salesman> salesmen = repository.findAll();
-		Salesman salesman = new Salesman(101, "Bittu");
-		salesman.setCity("Hyderabad");
-		salesman.setCommission(10452.33);
 		if (salesmen == null) {
 			salesmen = new ArrayList<>();
 		}
-		salesmen.add(salesman);
 		return salesmen;
 	}
 
