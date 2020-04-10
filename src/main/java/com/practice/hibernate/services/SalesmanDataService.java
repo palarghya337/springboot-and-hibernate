@@ -23,7 +23,7 @@ public class SalesmanDataService {
 		repository.saveAndFlush(salesman);
 	}
 	public Salesman getSalesman(int id) {
-		return repository.getOne(id);
+		return repository.findById(id).get();
 	}
 	public boolean deleteSalesMan(int id) {
 		Salesman salesman = getSalesman(id);

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Salesman {
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "salesman_name")
@@ -24,8 +24,7 @@ public class Salesman {
 	public Salesman() {
 		
 	}
-	public Salesman(int id, String name) {
-		this.id = id;
+	public Salesman(String name) {
 		this.name = name;
 	}
 	public int getId() {

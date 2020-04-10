@@ -12,7 +12,7 @@ import com.practice.hibernate.beans.Salesman;
 public class Client {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Client.class);
-	private static final String URL = "http://localhost:8080/";
+	private static final String URL = "http://localhost:8081/";
 	static WebClient webClient = WebClient.builder()
 			.baseUrl(URL).build();
 	public static void main(String[] args) {
@@ -31,8 +31,6 @@ public class Client {
 			}
 			case 2: {
 
-				LOGGER.info("ID: ");
-				int id = Integer.parseInt(scan.nextLine());
 				LOGGER.info("Name: ");
 				String name = scan.nextLine();
 				LOGGER.info("City");
@@ -40,7 +38,8 @@ public class Client {
 				LOGGER.info("Commission");
 				double commission = scan.nextDouble();
 				
-				Salesman salesman = new Salesman(id, name);
+				Salesman salesman = new Salesman(name);
+				salesman.setId(101);
 				salesman.setCity(city);
 				salesman.setCommission(commission);
 				
@@ -53,7 +52,7 @@ public class Client {
 			}
 			case 3: {
 
-				Salesman salesman = getSalesman(101);
+				Salesman salesman = getSalesman(1);
 				salesman.setCity("West Bengal");
 				webClient.put().uri("salesmen/updateSalesman")
 				.syncBody(salesman)
@@ -65,6 +64,15 @@ public class Client {
 			case 4: {
 				Salesman salesman = getSalesman(101);
 				LOGGER.info(salesman.toString());
+			}
+			case 5: {
+				boolean isDeleted = webClient.delete()
+					.uri("salesmen/delete/{id}", 1)
+					.retrieve()
+					.bodyToMono(Boolean.class)
+					.block();
+				LOGGER.info("isDeleted: " + isDeleted);
+				break;
 			}
 			}
 		}
@@ -79,7 +87,10 @@ public class Client {
 		return salesmen;
 	}
 	private static Salesman getSalesman(int id) {
-		return webClient.get().uri("salesmen/" + id).retrieve()
-		.bodyToMono(Salesman.class).block();
+		return webClient.get()
+				.uri("salesmen/{id}", id)
+				.retrieve()
+				.bodyToMono(Salesman.class)
+				.block();
 	}
 }
