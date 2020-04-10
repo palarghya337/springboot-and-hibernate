@@ -17,7 +17,8 @@ public class Client {
 			.baseUrl(URL).build();
 	public static void main(String[] args) {
 		
-		LOGGER.info("\n1. Get All\n2. Add\n3. Update\n4. Get By ID");
+		LOGGER.info("\n1. Get All\n2. Add\n3. Update"
+				+ "\n4. Get By ID\n5. Delete By ID\n6. Delete All");
 		try (Scanner scan = new Scanner(System.in)) {
 			
 			int input = Integer.parseInt(scan.nextLine());
@@ -71,6 +72,15 @@ public class Client {
 					.retrieve()
 					.bodyToMono(Boolean.class)
 					.block();
+				LOGGER.info("isDeleted: " + isDeleted);
+				break;
+			}
+			case 6: {
+				boolean isDeleted = webClient.delete()
+						.uri("salesmen/delete")
+						.retrieve()
+						.bodyToMono(Boolean.class)
+						.block();
 				LOGGER.info("isDeleted: " + isDeleted);
 				break;
 			}
