@@ -1,0 +1,4 @@
+1. What is @Transient?
+2. What is @JoinTable?
+3. What is @ManyToMany?
+4. What table variable does which is present inside @Column annotation?

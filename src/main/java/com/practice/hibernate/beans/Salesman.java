@@ -1,12 +1,7 @@
 package com.practice.hibernate.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "salesman")
@@ -17,44 +12,66 @@ public class Salesman {
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "sg")
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "salesman_name")
-	private String name;
-	@Column(name = "city")
-	private String city;
 	@Column(name = "commission")
 	private double commission;
-	public Salesman() {
-		
-	}
-	public Salesman(String name) {
-		this.name = name;
-	}
-	public int getId() {
+	@Column(name = "salesman_name")
+	private String name;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private Address address;
+	@OneToMany
+	private List<Customer> customers;
+
+	public Salesman() {}
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+
 	public double getCommission() {
 		return commission;
 	}
+
 	public void setCommission(double commission) {
 		this.commission = commission;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
 	@Override
 	public String toString() {
-		return "Salesman [id=" + id + ", name=" + name + ", city=" + city + ", commission=" + commission + "]";
+		return "Salesman{" +
+				"id=" + id +
+				", commission=" + commission +
+				", name='" + name + '\'' +
+				", address=" + address +
+				", customer=" + customers +
+				'}';
 	}
 }

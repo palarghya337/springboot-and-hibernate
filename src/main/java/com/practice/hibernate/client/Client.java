@@ -39,9 +39,9 @@ public class Client {
 				LOGGER.info("Commission");
 				double commission = scan.nextDouble();
 				
-				Salesman salesman = new Salesman(name);
+				Salesman salesman = new Salesman();
 				salesman.setId(101);
-				salesman.setCity(city);
+//				salesman.setCity(city);
 				salesman.setCommission(commission);
 				
 				webClient.post().uri("salesmen/addNew")
@@ -54,7 +54,7 @@ public class Client {
 			case 3: {
 
 				Salesman salesman = getSalesman(1);
-				salesman.setCity("West Bengal");
+//				salesman.setCity("West Bengal");
 				webClient.put().uri("salesmen/updateSalesman")
 				.syncBody(salesman)
 				.retrieve()
