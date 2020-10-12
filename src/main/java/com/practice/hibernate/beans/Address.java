@@ -14,14 +14,14 @@ public class Address {
     private int zipCode;
     @Column
     private String addressLine;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cityID")
     private City city;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "stateID")
     private State state;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "countryID")
     private Country country;
 
     public Address() {}

@@ -1,5 +1,7 @@
 package com.practice.hibernate.beans;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +11,15 @@ public class State {
     @Id
     @Column
     private int id;
+    
     @Column
     private String name;
-    @ManyToOne
+    
+    @OneToMany
+    private List<City> listOfCity;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "countryID")
     private Country country;
 
     public State() {}
@@ -38,6 +46,14 @@ public class State {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+    
+    public List<City> getListOfCity() {
+    	return listOfCity;
+    }
+    
+    public void setListOfCity(List<City> listOfCity) {
+    	this.listOfCity = listOfCity;
     }
 
     @Override

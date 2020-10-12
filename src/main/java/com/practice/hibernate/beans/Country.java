@@ -12,8 +12,10 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "sg")
     @Column
     private int id;
+    
     @Column
     private String name;
+    
     @OneToMany
     private List<State> states;
 

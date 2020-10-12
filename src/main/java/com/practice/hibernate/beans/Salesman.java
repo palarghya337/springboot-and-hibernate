@@ -12,13 +12,17 @@ public class Salesman {
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "sg")
 	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "commission")
 	private double commission;
+	
 	@Column(name = "salesman_name")
 	private String name;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
+	
 	@OneToMany
 	private List<Customer> customers;
 

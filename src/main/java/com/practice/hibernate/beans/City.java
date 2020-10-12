@@ -12,6 +12,9 @@ public class City {
     private int id;
     @Column
     private String name;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "stateID")
+    private State state;
 
     public City() {}
 
@@ -31,6 +34,14 @@ public class City {
         this.name = name;
     }
 
+    public State getState() {
+    	return state;
+    }
+    
+    public void setState(State state) {
+    	this.state = state;
+    }
+    
     @Override
     public String toString() {
         return "City{" +
@@ -38,4 +49,5 @@ public class City {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

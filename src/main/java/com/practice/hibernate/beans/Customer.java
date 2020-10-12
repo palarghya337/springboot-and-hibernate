@@ -10,9 +10,12 @@ public class Customer {
     @GeneratedValue
     @Column
     private int id;
+    
     @Column
     private String name;
+    
     @OneToOne
+    @JoinColumn(name = "addressID")
     private Address address;
 
     public Customer() {}
