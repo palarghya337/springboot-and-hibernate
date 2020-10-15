@@ -2,24 +2,34 @@ package com.practice.hibernate.beans;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "state")
 public class State {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     
-    @Column
+    @Column(name = "name")
     private String name;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "state_id")
     private List<City> listOfCity;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "countryID")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Country country;
 
     public State() {}

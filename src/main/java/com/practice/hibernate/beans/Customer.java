@@ -7,15 +7,15 @@ import javax.persistence.*;
 public class Customer {
 
     @Id
-    @GeneratedValue
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     
-    @Column
+    @Column(name = "name")
     private String name;
     
     @OneToOne
-    @JoinColumn(name = "addressID")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     public Customer() {}

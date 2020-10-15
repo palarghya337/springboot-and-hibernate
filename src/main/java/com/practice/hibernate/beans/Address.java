@@ -1,27 +1,41 @@
 package com.practice.hibernate.beans;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "address")
 public class Address {
 
     @Id
-    @GeneratedValue
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column
+    
+    @Column(name = "zip_code")
     private int zipCode;
-    @Column
+    
+    @Column(name = "address_line")
     private String addressLine;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "cityID")
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id")
+//    @Cascade(value = CascadeType.ALL)
     private City city;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "stateID")
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "state_id")
     private State state;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "countryID")
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Address() {}

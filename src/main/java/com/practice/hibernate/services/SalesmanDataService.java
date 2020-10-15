@@ -17,7 +17,7 @@ public class SalesmanDataService {
 	
 	public void addSalesman(Salesman salesman) {
 		
-		repository.save(salesman);
+		repository.saveAndFlush(salesman);
 	}
 	public void updateSalesman(Salesman salesman) {
 		repository.saveAndFlush(salesman);

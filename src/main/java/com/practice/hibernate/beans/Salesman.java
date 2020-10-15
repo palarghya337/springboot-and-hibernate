@@ -19,8 +19,8 @@ public class Salesman {
 	@Column(name = "salesman_name")
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "addressId", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private Address address;
 	
 	@OneToMany
